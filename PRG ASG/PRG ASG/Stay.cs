@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using System.Linq;
@@ -13,15 +13,22 @@ namespace PRG_ASG
 
         public DateTime CheckoutDate { get; set; }
 
+        public List <Room> RoomList { get; set; }
+
         public Stay() { }
 
-        public Stay (DateTime checkinDate, DateTime checkoutDate)
+        public Stay(DateTime checkinDate, DateTime checkoutDate)
         {
             CheckinDate = checkinDate;
             CheckoutDate = checkoutDate;
         }
 
-        public double CalculateTotal () 
+        public void AddRoom (Room room)
+        {
+            RoomList.Add(room);
+        }
+
+        public double CalculateTotal()
         {
             foreach (Room room in RoomList)
             {
