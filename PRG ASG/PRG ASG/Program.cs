@@ -14,3 +14,17 @@ void DisplayGuest()
 }
 // Name: Isaac Khoo
 // Student Number: S10244252C
+
+void Displayroom()
+{
+    Console.WriteLine("List Information Of All Rooms: ");
+    string[] roominfo = File.ReadAllLines("Rooms.csv");
+    string[] roomdata = roominfo[0].Split(',');
+    List<Room> roomlist = new List<Room>();
+
+    for (int i = 1; i < roominfo.Length; i++)
+    {
+        string[] roomcontent = roominfo[1].Split(',');
+        Console.WriteLine("{0,-10}{1,-10}{2,-10}{3,-10}", roomcontent[0], roomcontent[1], roomcontent[2], roomcontent[3]);
+    }
+}
