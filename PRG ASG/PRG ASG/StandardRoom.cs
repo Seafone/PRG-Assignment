@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+// Name: Isaac Khoo
+// Student Number: S10244252C
 
 namespace PRG_ASG
 {
@@ -14,30 +16,30 @@ namespace PRG_ASG
 
         public StandardRoom() { }
 
-        public StandardRoom(int r, string b, double dr, bool ia): base(r, b, dr, ia) { }
+        public StandardRoom(int r, string b, double dr, bool ia) : base(r, b, dr, ia) { }
 
         public override double CalculateCharges()
         {
             double total = 0;
-            if (RequireWifi == true)
+            if (requireWifi == true)
             {
                 total = +10;
             }
-            if (RequireBreakfast == true)
+            if (requireBreakfast == true)
             {
                 total = +20;
             }
 
-            total = DailyRate + total;
-            if (BedConfiguration == "single")
+            total = dailyRate + total;
+            if (bedConfiguration == "single")
             {
                 total = +90;
             }
-            else if (BedConfiguration == "twin")
+            else if (bedConfiguration == "twin")
             {
                 total = +110;
             }
-            else if (BedConfiguration == "triple")
+            else if (bedConfiguration == "triple")
             {
                 total = +120;
             }
@@ -50,3 +52,4 @@ namespace PRG_ASG
         }
     }
 }
+
