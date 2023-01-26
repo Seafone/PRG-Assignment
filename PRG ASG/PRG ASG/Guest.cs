@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+// Name: Natalie Chan
+// Student Number: S10220879H
 
 namespace PRG_ASG
 {
@@ -18,9 +20,9 @@ namespace PRG_ASG
 
         public bool IsCheckedin { get; set; }
 
-        public Guest () { }
+        public Guest() { }
 
-        public Guest (string name, string passportNum, Stay hotelStay, Membership member)
+        public Guest(string name, string passportNum, Stay hotelStay, Membership member)
         {
             Name = name;
             PassportNum = passportNum;
