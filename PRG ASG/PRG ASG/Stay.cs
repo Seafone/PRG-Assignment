@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace asg
+namespace PRG_ASG
 {
     class Stay
     {
@@ -24,6 +24,7 @@ namespace asg
         public double CalculateTotal () 
         {
 
+            
         }
 
         public override string ToString()
