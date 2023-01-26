@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+// Name: Isaac Khoo
+// Student Number: S10244252C
 
 namespace PRG_ASG
 {
-    internal abstract class DeluxeRoom: Room
+    internal abstract class DeluxeRoom : Room
     {
         public bool additionalBed { get; set; }
 
         public DeluxeRoom() { }
-        
-        public DeluxeRoom(int rn, string bc, double dr, bool ia): base(rn, bc, dr, ia) { }
+
+        public DeluxeRoom(int rn, string bc, double dr, bool ia) : base(rn, bc, dr, ia) { }
 
         public override string ToString()
         {
