@@ -23,8 +23,12 @@ namespace PRG_ASG
 
         public double CalculateTotal () 
         {
-
-            
+            foreach (Room room in RoomList)
+            {
+                double total = +room.CalculateCharges() * (CheckinDate.Subtract(CheckoutDate).Days);
+                return total;
+            }
+            return 0;
         }
 
         public override string ToString()
