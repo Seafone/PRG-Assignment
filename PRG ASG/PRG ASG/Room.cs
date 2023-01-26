@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+// Name: Isaac Khoo
+// Student Number: S10244252C
 
 namespace PRG_ASG
 {
@@ -31,7 +33,7 @@ namespace PRG_ASG
 
         public override string ToString()
         {
-            return base.ToString() + $", Room Number: {roomNumber}, Bed Configuration: {bedConfiguration}, Daily Rate: {dailyRate}, Is Available: {isAvail}" ;
+            return base.ToString() + $", Room Number: {roomNumber}, Bed Configuration: {bedConfiguration}, Daily Rate: {dailyRate}, Is Available: {isAvail}";
         }
     }
 
