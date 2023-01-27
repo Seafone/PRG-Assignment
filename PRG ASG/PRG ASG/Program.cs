@@ -37,13 +37,23 @@ void initialiseRoom()
 void initialiseStay()
 {
     string[] staysinfo = File.ReadAllLines("Stays.csv");
-    string[] staysdata = staysinfo[0].Split(',');
+    for(int i = 1; i < staysinfo.Length; i++)
+    {
+        string[] staycontent = staysinfo[i].Split(',');
+        Stay stay = new Stay(Convert.ToDateTime(staycontent[3]),Convert.ToDateTime(staycontent[4]));
+    }
 }
 
 void initialiseGuest()
 {
     string[] guestinfo = File.ReadAllLines("Guests.csv");
-    string[] guestdata = guestinfo[0].Split(',');
+    for (int i = 1; i < guestinfo.Length; i++)
+    {
+        string[] guestcontent = guestinfo[i].Split(',');
+        Stay stay = new Stay(default, default);
+        Membership membership = new Membership(guestcontent[2], Convert.ToInt32(guestcontent[3]));
+        Guest guest = new Guest(guestcontent[0], guestcontent[1],stay,membership);
+    }
 
 }
 
