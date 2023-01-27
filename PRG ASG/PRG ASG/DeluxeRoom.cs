@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PRG_ASG
 {
-    internal abstract class DeluxeRoom : Room
+    internal class DeluxeRoom : Room
     {
         public bool additionalBed { get; set; }
 
@@ -19,6 +19,11 @@ namespace PRG_ASG
         public override string ToString()
         {
             return base.ToString() + $"Additional Bed: {additionalBed}";
+        }
+
+        public override double CalculateCharges()
+        {
+            return 0;
         }
     }
 }

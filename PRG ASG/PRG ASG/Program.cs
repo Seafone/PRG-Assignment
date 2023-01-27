@@ -3,6 +3,52 @@ using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
 // Name: Isaac Khoo
 // Student Number: S10244252
+
+
+List<Room> RoomList = new List<Room>();
+List<Stay> StayList = new List<Stay>();
+List<Guest> GuestList = new List<Guest>();
+
+void initialiseRoom()
+{
+    string[] roominfo = File.ReadAllLines("Rooms.csv");
+    for (int i = 1; i < roominfo.Length; i++)
+    {
+        string[] roomcontent = roominfo[i].Split(',');
+        if (roomcontent[0] == "Standard")
+        {
+            StandardRoom NStandard = new StandardRoom(Convert.ToInt32(roomcontent[1]), roomcontent[2], Convert.ToDouble(roomcontent[3]), true);
+            RoomList.Add(NStandard);
+        }
+
+        else if (roomcontent[0] == "Deluxe")
+        {
+            DeluxeRoom NDeluxe = new DeluxeRoom(Convert.ToInt32(roomcontent[1]), roomcontent[2], Convert.ToDouble(roomcontent[3]), true);
+            RoomList.Add(NDeluxe);
+        }
+
+        else
+        {
+            continue;
+        }
+    }
+}
+
+void initialiseStay()
+{
+    string[] staysinfo = File.ReadAllLines("Stays.csv");
+    string[] staysdata = staysinfo[0].Split(',');
+}
+
+void initialiseGuest()
+{
+    string[] guestinfo = File.ReadAllLines("Guests.csv");
+    string[] guestdata = guestinfo[0].Split(',');
+
+}
+
+
+
 void startupmenu()
 {
     Console.WriteLine("=======================================================================================================");
@@ -12,6 +58,7 @@ void startupmenu()
     Console.WriteLine("Input Option: ");
     string selectfunction = Console.ReadLine();
     int selectedfunction = Convert.ToInt32(selectfunction);
+    
     if (selectedfunction == 1)
     {
         DisplayGuest();
@@ -54,23 +101,6 @@ void startupmenu()
     }
 }
 
-void initialiseRoom()
-{
-    string[] roominfo = File.ReadAllLines("Rooms.csv");
-    string[] roomdata = roominfo[0].Split(',');
-}
-
-void initialiseStay()
-{
-    string[] staysinfo = File.ReadAllLines("Stays.csv");
-    string[] staysdata = staysinfo[0].Split(',');
-}
-
-void initialiseGuest()
-{
-    string[] guestinfo = File.ReadAllLines("Guests.csv");
-    string[] guestdata = guestinfo[0].Split(',');
-}
 
 // Name: Natalie Chan
 // Student Number: S10220879H
@@ -91,15 +121,7 @@ void DisplayGuest()
 void Displayroom()
 {
     Console.WriteLine("List Information Of All Rooms: ");
-    string[] roominfo = File.ReadAllLines("Rooms.csv");
-    string[] roomdata = roominfo[0].Split(',');
-    List<Room> roomlist = new List<Room>();
 
-    for (int i = 1; i < roominfo.Length; i++)
-    {
-        string[] roomcontent = roominfo[1].Split(',');
-        Console.WriteLine("{0,-10}{1,-10}{2,-10}{3,-10}", roomcontent[0], roomcontent[1], roomcontent[2], roomcontent[3]);
-    }
 }
 
 // Name: Natalie Chan

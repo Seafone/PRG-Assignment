@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PRG_ASG
 {
-    internal abstract class StandardRoom : Room
+    internal class StandardRoom : Room
     {
         public bool requireWifi { get; set; }
 
