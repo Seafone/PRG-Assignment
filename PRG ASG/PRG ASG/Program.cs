@@ -9,47 +9,68 @@ void startupmenu()
     Console.WriteLine("Select Function");
     Console.WriteLine("1: All Guests \n2: Available Rooms \n3: Register Guest \n4: Check-in guest \n5: Stay Details Of Guest \n6: Extend Stay \n0: Quit Menu");
     Console.WriteLine("=======================================================================================================");
+    Console.WriteLine("Input Option: ");
     string selectfunction = Console.ReadLine();
     int selectedfunction = Convert.ToInt32(selectfunction);
     if (selectedfunction == 1)
     {
         DisplayGuest();
+        startupmenu();
     }
 
     else if (selectedfunction == 2)
     {
         Displayroom();
+        startupmenu();
     }
 
     else if (selectedfunction == 3)
     {
-
+        registerguest();
+        startupmenu();
     }
 
     else if (selectedfunction == 4)
     {
-
+        checkinguest();
+        startupmenu();
     }
 
     else if (selectedfunction == 5)
     {
-
+        gueststaydetails();
+        startupmenu();
     }
 
     else if (selectedfunction == 6)
     {
-
+        extendstay();
+        startupmenu();
     }
 
     else if (selectedfunction == 0)
     {
-        Console.WriteLine("Ending progran... ...");
+        Console.WriteLine("Ending program... ...");
     }
 }
 
+void initialiseRoom()
+{
+    string[] roominfo = File.ReadAllLines("Rooms.csv");
+    string[] roomdata = roominfo[0].Split(',');
+}
 
+void initialiseStay()
+{
+    string[] staysinfo = File.ReadAllLines("Stays.csv");
+    string[] staysdata = staysinfo[0].Split(',');
+}
 
-
+void initialiseGuest()
+{
+    string[] guestinfo = File.ReadAllLines("Guests.csv");
+    string[] guestdata = guestinfo[0].Split(',');
+}
 
 // Name: Natalie Chan
 // Student Number: S10220879H
