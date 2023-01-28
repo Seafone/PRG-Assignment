@@ -1,5 +1,6 @@
 using PRG_ASG;
 using System.ComponentModel.Design;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 // Name: Isaac Khoo
 // Student Number: S10244252
@@ -57,7 +58,54 @@ void initialiseStay()
                     deluxe.additionalBed = Convert.ToBoolean(staycontent[8]);
                     deluxe.isAvail = false;
                     stay.RoomList.Add(deluxe);
-                    CheckExtraRoom(stay)
+                }
+                else if (room.roomNumber == Convert.ToInt32(staycontent[5]))
+                {
+                    StandardRoom standard = (StandardRoom)room;
+                    standard.requireWifi = Convert.ToBoolean(staycontent[8]);
+                    standard.isAvail = false;
+                    stay.RoomList.Add(standard);
+                }
+
+            else
+                {
+                    continue;
+                }
+    for(int j = 0; j < GuestList.Count; j++)
+                {
+                    if (GuestList[j].PassportNum == staycontent[1])
+                    {
+                        GuestList[i].HotelStay = stay;
+                        GuestList[i].IsCheckedin = Convert.ToBoolean(staycontent[2]);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+    foreach (Room room2 in RoomList)
+                    {
+                        if (staycontent[9] != "")
+                        {
+                            if (room2 is StandardRoom)
+                            {
+                                StandardRoom standard = (StandardRoom)room2;
+                                standard.requireWifi = Convert.ToBoolean(staycontent[10]);
+                                standard.requireBreakfast = Convert.ToBoolean(staycontent[11]);
+                                stay.RoomList.Add(standard);
+                            }
+
+                            else
+                            {
+                                continue;
+                            }
+                        }
+
+                        else
+                        {
+                            continue;
+                        }
+                    }
                 }
             }
         }
@@ -152,15 +200,6 @@ void DisplayGuest()
 void DisplayAvailroom()
 {
     Console.WriteLine("List Information Of All Available Rooms: ");
-    int count = 1;
-    foreach (Room r in RoomList)
-    {
-        if (r.isAvail)
-        {
-            Console.WriteLine("{0} {1}", count, r);
-            count++;
-        }
-    }
 }
 
 Room FindRoom(int roomNo)

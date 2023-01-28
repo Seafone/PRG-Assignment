@@ -19,12 +19,10 @@ namespace PRG_ASG
         public override double CalculateCharges()
         {
             double totalRate = dailyRate;
-            // If there is an additional bed, it will cost $25 more
             if (additionalBed is true)
             {
                 totalRate = dailyRate + 25;
             }
-            // Else, the rate remains the same
             return totalRate;
         }
 
