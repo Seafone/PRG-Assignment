@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,14 +16,21 @@ namespace PRG_ASG
 
         public DeluxeRoom(int rn, string bc, double dr, bool ia) : base(rn, bc, dr, ia) { }
 
+        public override double CalculateCharges()
+        {
+            double totalRate = dailyRate;
+            // If there is an additional bed, it will cost $25 more
+            if (additionalBed is true)
+            {
+                totalRate = dailyRate + 25;
+            }
+            // Else, the rate remains the same
+            return totalRate;
+        }
+
         public override string ToString()
         {
             return base.ToString() + $"Additional Bed: {additionalBed}";
-        }
-
-        public override double CalculateCharges()
-        {
-            return 0;
         }
     }
 }
