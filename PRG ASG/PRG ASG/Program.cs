@@ -214,20 +214,6 @@ void DisplayAvailroom()
     
 }
 
-Room FindRoom(int roomNo)
-{
-    foreach (Room r in RoomList)
-    {
-        if (r.roomNumber == roomNo)
-        {
-            return r;
-        }
-
-    }
-
-    return null;
-}
-
 // Name: Natalie Chan
 // Student Number: S10220879H
 void registerguest()
