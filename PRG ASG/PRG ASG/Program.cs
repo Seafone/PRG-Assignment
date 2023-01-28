@@ -135,12 +135,15 @@ void DisplayAvailroom()
     initialiseStay();
     initialiseRoom();
     Console.WriteLine("List Information Of All Available Rooms: ");
-    for (int i = 1; i < StayList.Count; i++)
+    int count = 1;
+    foreach (Room r in RoomList)
     {
-        Console.WriteLine(List[i]);
+        if (r.isAvail)
+        {
+            Console.WriteLine("{0} {1}", count, r);
+            count++;
+        }
     }
-
-
 }
 
 Room FindRoom(int roomNo)
