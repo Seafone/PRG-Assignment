@@ -41,6 +41,7 @@ void initialiseStay()
     {
         string[] staycontent = staysinfo[i].Split(',');
         Stay stay = new Stay(Convert.ToDateTime(staycontent[3]),Convert.ToDateTime(staycontent[4]));
+        StayList.Add(stay);
     }
 }
 
@@ -53,6 +54,7 @@ void initialiseGuest()
         Stay stay = new Stay(default, default);
         Membership membership = new Membership(guestcontent[2], Convert.ToInt32(guestcontent[3]));
         Guest guest = new Guest(guestcontent[0], guestcontent[1],stay,membership);
+        GuestList.Add(guest);
     }
 
 }
@@ -135,10 +137,24 @@ void DisplayAvailroom()
     Console.WriteLine("List Information Of All Available Rooms: ");
     for (int i = 1; i < StayList.Count; i++)
     {
-        Console.WriteLine(StayList[2]);
+        Console.WriteLine(List[i]);
     }
 
 
+}
+
+Room FindRoom(int roomNo)
+{
+    foreach (Room r in RoomList)
+    {
+        if (r.roomNumber == roomNo)
+        {
+            return r;
+        }
+        
+    }
+
+    return null;
 }
 
 // Name: Natalie Chan
