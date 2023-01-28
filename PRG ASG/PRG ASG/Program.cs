@@ -77,7 +77,7 @@ void startupmenu()
 
     else if (selectedfunction == 2)
     {
-        Displayroom();
+        DisplayAvailroom();
         startupmenu();
     }
 
@@ -128,9 +128,16 @@ void DisplayGuest()
 // Name: Isaac Khoo
 // Student Number: S10244252C
 
-void Displayroom()
+void DisplayAvailroom()
 {
-    Console.WriteLine("List Information Of All Rooms: ");
+    initialiseStay();
+    initialiseRoom();
+    Console.WriteLine("List Information Of All Available Rooms: ");
+    for (int i = 1; i < StayList.Count; i++)
+    {
+        Console.WriteLine(StayList[2]);
+    }
+
 
 }
 
