@@ -23,7 +23,11 @@ namespace PRG_ASG
 
         public override double CalculateCharges()
         {
-            return 0;
+            if (additionalBed == true)
+            {
+                return dailyRate = dailyRate + 25;
+            }
+            return dailyRate;
         }
     }
 }

@@ -9,6 +9,11 @@ List<Room> RoomList = new List<Room>();
 List<Stay> StayList = new List<Stay>();
 List<Guest> GuestList = new List<Guest>();
 
+initialiseRoom();
+initialiseStay();
+initialiseGuest();
+
+
 void initialiseRoom()
 {
     string[] roominfo = File.ReadAllLines("Rooms.csv");
@@ -42,6 +47,20 @@ void initialiseStay()
         string[] staycontent = staysinfo[i].Split(',');
         Stay stay = new Stay(Convert.ToDateTime(staycontent[3]),Convert.ToDateTime(staycontent[4]));
         StayList.Add(stay);
+        foreach (Room room in RoomList)
+        {
+            if (room.roomNumber == Convert.ToInt32(staycontent[5]))
+            {
+                if (room is DeluxeRoom)
+                {
+                    DeluxeRoom deluxe = (DeluxeRoom)room;
+                    deluxe.additionalBed = Convert.ToBoolean(staycontent[8]);
+                    deluxe.isAvail = false;
+                    stay.RoomList.Add(deluxe);
+                    CheckExtraRoom(stay)
+                }
+            }
+        }
     }
 }
 
@@ -132,18 +151,9 @@ void DisplayGuest()
 
 void DisplayAvailroom()
 {
-    initialiseStay();
-    initialiseRoom();
     Console.WriteLine("List Information Of All Available Rooms: ");
-    int count = 1;
-    foreach (Room r in RoomList)
-    {
-        if (r.isAvail)
-        {
-            Console.WriteLine("{0} {1}", count, r);
-            count++;
-        }
-    }
+    
+
 }
 
 Room FindRoom(int roomNo)
