@@ -48,7 +48,7 @@ namespace PRG_ASG
 
         public override string ToString()
         {
-            return base.ToString() + $"Require Wifi: {requireWifi}, Require Breakfast: {requireBreakfast}";
+            return base.ToString() + $"\tRequire Wifi: {requireWifi}, \tRequire Breakfast: {requireBreakfast}";
         }
     }
 }

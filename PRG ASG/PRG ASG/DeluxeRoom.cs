@@ -28,7 +28,7 @@ namespace PRG_ASG
 
         public override string ToString()
         {
-            return base.ToString() + $"Additional Bed: {additionalBed}";
+            return base.ToString() + $"\tAdditional Bed: {additionalBed}";
         }
     }
 }

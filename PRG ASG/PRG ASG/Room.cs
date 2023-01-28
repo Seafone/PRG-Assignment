@@ -33,7 +33,7 @@ namespace PRG_ASG
 
         public override string ToString()
         {
-            return base.ToString() + $", Room Number: {roomNumber}, Bed Configuration: {bedConfiguration}, Daily Rate: {dailyRate}, Is Available: {isAvail}";
+            return $"Room Number: {roomNumber}, \tBed Configuration: {bedConfiguration}, \tDaily Rate: {dailyRate}, \tIs Available: {isAvail}";
         }
     }
 

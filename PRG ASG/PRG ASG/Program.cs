@@ -200,6 +200,18 @@ void DisplayGuest()
 void DisplayAvailroom()
 {
     Console.WriteLine("List Information Of All Available Rooms: ");
+    foreach (Room room in RoomList)
+    {
+        if (room.isAvail == true)
+        {
+            Console.WriteLine(room.ToString());
+        }
+        else
+        {
+            continue;
+        }
+    }
+    
 }
 
 Room FindRoom(int roomNo)
