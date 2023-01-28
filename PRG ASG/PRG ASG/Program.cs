@@ -37,10 +37,10 @@ void initialiseRoom()
 void initialiseStay()
 {
     string[] staysinfo = File.ReadAllLines("Stays.csv");
-    for(int i = 1; i < staysinfo.Length; i++)
+    for (int i = 1; i < staysinfo.Length; i++)
     {
         string[] staycontent = staysinfo[i].Split(',');
-        Stay stay = new Stay(Convert.ToDateTime(staycontent[3]),Convert.ToDateTime(staycontent[4]));
+        Stay stay = new Stay(Convert.ToDateTime(staycontent[3]), Convert.ToDateTime(staycontent[4]));
         StayList.Add(stay);
     }
 }
@@ -53,7 +53,7 @@ void initialiseGuest()
         string[] guestcontent = guestinfo[i].Split(',');
         Stay stay = new Stay(default, default);
         Membership membership = new Membership(guestcontent[2], Convert.ToInt32(guestcontent[3]));
-        Guest guest = new Guest(guestcontent[0], guestcontent[1],stay,membership);
+        Guest guest = new Guest(guestcontent[0], guestcontent[1], stay, membership);
         GuestList.Add(guest);
     }
 
@@ -70,7 +70,7 @@ void startupmenu()
     Console.WriteLine("Input Option: ");
     string selectfunction = Console.ReadLine();
     int selectedfunction = Convert.ToInt32(selectfunction);
-    
+
     if (selectedfunction == 1)
     {
         DisplayGuest();
@@ -135,15 +135,12 @@ void DisplayAvailroom()
     initialiseStay();
     initialiseRoom();
     Console.WriteLine("List Information Of All Available Rooms: ");
-    int count = 1;
-    foreach (Room r in RoomList)
+    for (int i = 1; i < StayList.Count; i++)
     {
-        if (r.isAvail)
-        {
-            Console.WriteLine("{0} {1}", count, r);
-            count++;
-        }
+        Console.WriteLine(RoomList[i]);
     }
+
+
 }
 
 Room FindRoom(int roomNo)
@@ -154,7 +151,7 @@ Room FindRoom(int roomNo)
         {
             return r;
         }
-        
+
     }
 
     return null;
