@@ -23,17 +23,38 @@ namespace PRG_ASG
         }
         public void EarnPoints(double EP)
         {
-            Points = Convert.ToInt32(EP) / 10;
+            int pointsEarned = Convert.ToInt32(Math.Round(EP, 0, MidpointRounding.AwayFromZero)); //round up to nearest number
+            Points += pointsEarned; //add points earned to points
+
+            if (Status == "Ordinary")
+            {
+                if (Points >= 200)
+                { Status = "Gold"; }
+                if (Points >= 100)
+                { Status = "Silver"; }               
+            }
+            if (Status == "Silver")
+            {
+                if (Points >= 200)
+                { Status = "Gold"; }                
+            }
+
         }
 
         public bool ReedemPoints(int RP)
         {
+            if (Status == "Ordinary")
+            {
+                return false;
+            }
+
             if (RP <= 0)
             {
                 return false;
             }
             else
             {
+                Points -= RP;
                 return true;
             }
         }
