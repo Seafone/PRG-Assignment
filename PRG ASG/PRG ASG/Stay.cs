@@ -23,6 +23,7 @@ namespace PRG_ASG
         {
             CheckinDate = checkinDate;
             CheckoutDate = checkoutDate;
+            RoomList = new List<Room>();
         }
 
         public void AddRoom (Room room)
