@@ -30,11 +30,7 @@ namespace PRG_ASG
 
         public override string ToString()
         {
-            if (additionalBed == true)
-            {
-                return dailyRate = dailyRate + 25;
-            }
-            return dailyRate;
+            return base.ToString() + $"Additional Bed: {additionalBed}";
         }
     }
 }
