@@ -134,43 +134,51 @@ void startupmenu()
     Console.WriteLine("Select Function");
     Console.WriteLine("1: All Guests \n2: Available Rooms \n3: Register Guest \n4: Check-in guest \n5: Stay Details Of Guest \n6: Extend Stay \n0: Quit Menu");
     Console.WriteLine("=======================================================================================================");
+    Console.WriteLine("");
     Console.WriteLine("Input Option: ");
     string selectfunction = Console.ReadLine();
+    Console.WriteLine("");
     int selectedfunction = Convert.ToInt32(selectfunction);
 
     if (selectedfunction == 1)
     {
         DisplayGuest();
+        Console.WriteLine("");
         startupmenu();
     }
 
     else if (selectedfunction == 2)
     {
         DisplayAvailroom();
+        Console.WriteLine("");
         startupmenu();
     }
 
     else if (selectedfunction == 3)
     {
         registerguest();
+        Console.WriteLine("");
         startupmenu();
     }
 
     else if (selectedfunction == 4)
     {
         checkinguest();
+        Console.WriteLine("");
         startupmenu();
     }
 
     else if (selectedfunction == 5)
     {
         gueststaydetails();
+        Console.WriteLine("");
         startupmenu();
     }
 
     else if (selectedfunction == 6)
     {
         extendstay();
+        Console.WriteLine("");
         startupmenu();
     }
 
