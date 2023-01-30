@@ -7,14 +7,22 @@ using System.Security.Cryptography.X509Certificates;
 // Student Number: S10244252
 
 
+// Name: Isaac Khoo
+// Student Number: S10244252C
+
 List<Room> RoomList = new List<Room>();
 List<Stay> StayList = new List<Stay>();
 List<Guest> GuestList = new List<Guest>();
+
+// Name: Isaac Khoo
+// Student Number: S10244252C
 
 initialiseRoom();
 initialiseStay();
 initialiseGuest();
 
+// Name: Isaac Khoo
+// Student Number: S10244252C
 
 void initialiseRoom()
 {
@@ -40,6 +48,9 @@ void initialiseRoom()
         }
     }
 }
+
+// Name: Isaac Khoo
+// Student Number: S10244252C
 
 void initialiseStay()
 {
@@ -113,6 +124,9 @@ void initialiseStay()
     }
 }
 
+// Name: Isaac Khoo
+// Student Number: S10244252C
+
 void initialiseGuest()
 {
     string[] guestinfo = File.ReadAllLines("Guests.csv");
@@ -127,7 +141,8 @@ void initialiseGuest()
 
 }
 
-
+// Name: Isaac Khoo
+// Student Number: S10244252C
 
 void startupmenu()
 {
@@ -203,6 +218,10 @@ void DisplayGuest()
     }
 
 }
+
+
+// Name: Isaac Khoo
+// Student Number: S10244252C
 
 void displayguestv2()
 {
@@ -370,7 +389,7 @@ void gueststaydetails()
 
 void extendstay()
 {
-
+    
 }
 
 
