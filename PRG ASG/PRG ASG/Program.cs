@@ -20,6 +20,7 @@ List<Guest> GuestList = new List<Guest>();
 initialiseRoom();
 initialiseStay();
 initialiseGuest();
+startupmenu();
 
 // Name: Isaac Khoo
 // Student Number: S10244252C
@@ -146,259 +147,329 @@ void initialiseGuest()
 
 void startupmenu()
 {
-    Console.WriteLine("=======================================================================================================");
-    Console.WriteLine("Select Function");
-    Console.WriteLine("1: All Guests \n2: Available Rooms \n3: Register Guest \n4: Check-in guest \n5: Stay Details Of Guest \n6: Extend Stay \n0: Quit Menu");
-    Console.WriteLine("=======================================================================================================");
-    Console.WriteLine("");
-    Console.WriteLine("Input Option: ");
-    string selectfunction = Console.ReadLine();
-    Console.WriteLine("");
-    int selectedfunction = Convert.ToInt32(selectfunction);
-
-    if (selectedfunction == 1)
+    try
     {
-        DisplayGuest();
+        Console.WriteLine("=======================================================================================================");
+        Console.WriteLine("Select Function");
+        Console.WriteLine("1: All Guests \n2: Available Rooms \n3: Register Guest \n4: Check-in guest \n5: Stay Details Of Guest \n6: Extend Stay \n0: Quit Menu");
+        Console.WriteLine("=======================================================================================================");
+        Console.WriteLine("\nInput Option: ");
+        string selectfunction = Console.ReadLine();
         Console.WriteLine("");
-        startupmenu();
-    }
+        int selectedfunction = Convert.ToInt32(selectfunction);
 
-    else if (selectedfunction == 2)
-    {
-        DisplayAvailroom();
-        Console.WriteLine("");
-        startupmenu();
-    }
-
-    else if (selectedfunction == 3)
-    {
-        registerguest();
-        Console.WriteLine("");
-        startupmenu();
-    }
-
-    else if (selectedfunction == 4)
-    {
-        checkinguest();
-        Console.WriteLine("");
-        startupmenu();
-    }
-
-    else if (selectedfunction == 5)
-    {
-        gueststaydetails();
-        Console.WriteLine("");
-        startupmenu();
-    }
-
-    else if (selectedfunction == 6)
-    {
-        extendstay();
-        Console.WriteLine("");
-        startupmenu();
-    }
-
-    else if (selectedfunction == 0)
-    {
-        Console.WriteLine("Ending program... ...");
-    }
-}
-
-
-// Name: Natalie Chan
-// Student Number: S10220879H
-void DisplayGuest()
-{
-    string[] info = File.ReadAllLines("Guests.csv");
-
-    for (int i = 0; i < info.Length; i++)
-    {
-        string[] data = info[i].Split(',');
-        Console.WriteLine("{0,-10} {1,-10} {2,-10} {3,-10}", data[0], data[1], data[2], data[3]);
-    }
-
-}
-
-
-// Name: Isaac Khoo
-// Student Number: S10244252C
-
-void displayguestv2()
-{
-    for (int i =0; i < GuestList.Count; i++)
-    {
-        int x = i + 1;
-        Console.WriteLine("[" + x + "]" + GuestList[i].ToString());
-    }
-}
-
-// Name: Isaac Khoo
-// Student Number: S10244252C
-
-void DisplayAvailroom()
-{
-    Console.WriteLine("List Information Of All Available Rooms: ");
-    foreach (Room room in RoomList)
-    {
-        if (room.isAvail == true)
+        if (selectedfunction == 1)
         {
-            Console.WriteLine(room.ToString());
+            DisplayGuest();
+            Console.WriteLine("");
+            startupmenu();
         }
+
+        else if (selectedfunction == 2)
+        {
+            DisplayAvailroom();
+            Console.WriteLine("");
+            startupmenu();
+        }
+
+        else if (selectedfunction == 3)
+        {
+            registerguest();
+            Console.WriteLine("");
+            startupmenu();
+        }
+
+        else if (selectedfunction == 4)
+        {
+            checkinguest();
+            Console.WriteLine("");
+            startupmenu();
+        }
+
+        else if (selectedfunction == 5)
+        {
+            gueststaydetails();
+            Console.WriteLine("");
+            startupmenu();
+        }
+
+        else if (selectedfunction == 6)
+        {
+            extendstay();
+            Console.WriteLine("");
+            startupmenu();
+        }
+
+        else if (selectedfunction == 0)
+        {
+            Console.WriteLine("Ending program... ...");
+        }
+
         else
         {
-            continue;
+            Console.WriteLine("Invalid Input! ");
+            startupmenu();
         }
     }
-    
-}
-
-// Name: Natalie Chan
-// Student Number: S10220879H
-void registerguest()
-{
-
-}
-
-// Name: Isaac Khoo
-// Student Number: S10244252C
-
-void checkinguest()
-{
-    while (true)
+    catch (Exception ex)
     {
-        displayguestv2();
-        Console.WriteLine("\nPlease Select A Guest To Retrieve: ");
-        int guestinput = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("\nPlease Enter Your Day of Check In (DD/MM/YYYY): ");
-        DateTime checkin = Convert.ToDateTime(Console.ReadLine());
-        Console.WriteLine("\nPlease Enter Your Day of Check Out (DD/MM/YYYY): ");
-        DateTime checkout = Convert.ToDateTime(Console.ReadLine());
+        Console.WriteLine("Invalid Input! ");
+        startupmenu();
+    }
+}
 
-        if (guestinput < GuestList.Count && guestinput > 0)
+
+    // Name: Natalie Chan
+    // Student Number: S10220879H
+    void DisplayGuest()
+    {
+        string[] info = File.ReadAllLines("Guests.csv");
+
+        for (int i = 0; i < info.Length; i++)
         {
-            Guest changestay = GuestList[guestinput-1];
-            Stay stay1 = new(checkin, checkout);
-            changestay.HotelStay = stay1;
-            List<Room> temp = new List<Room>();
-            foreach(Room r in RoomList)
-            {
-                if (r.isAvail)
-                {
-                    temp.Add(r);
-                }
-            }
-            int x = 1;
-            foreach(Room r in temp)
-            {
-                Console.WriteLine("[{0}] - {1}",x ,r);
-                x++;
-            }
+            string[] data = info[i].Split(',');
+            Console.WriteLine("{0,-10} {1,-10} {2,-10} {3,-10}", data[0], data[1], data[2], data[3]);
+        }
 
-            Console.WriteLine("Please Select A Room Number: ");
-            int choice = Convert.ToInt32(Console.ReadLine());
-            Room room = temp[choice - 1];
-            foreach(Room r in RoomList)
+    }
+
+
+    // Name: Isaac Khoo
+    // Student Number: S10244252C
+
+    void displayguestv2()
+    {
+        for (int i = 0; i < GuestList.Count; i++)
+        {
+            int x = i + 1;
+            Console.WriteLine("[" + x + "]" + "\t" + GuestList[i].ToString());
+        }
+    }
+
+    // Name: Isaac Khoo
+    // Student Number: S10244252C
+
+    void DisplayAvailroom()
+    {
+        Console.WriteLine("List Information Of All Available Rooms: ");
+        foreach (Room room in RoomList)
+        {
+            if (room.isAvail == true)
             {
-                if (r == room)
-                {   
-                    if (room is StandardRoom sr)
+                Console.WriteLine(room.ToString());
+            }
+            else
+            {
+                continue;
+            }
+        }
+
+    }
+
+    // Name: Natalie Chan
+    // Student Number: S10220879H
+    void registerguest()
+    {
+
+    }
+
+    // Name: Isaac Khoo
+    // Student Number: S10244252C
+
+    void checkinguest()
+    {
+        while (true)
+        {
+            displayguestv2();
+            try
+            {
+                Console.WriteLine("\nPlease Select A Guest To Retrieve: ");
+                int guestinput = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("\nPlease Enter Your Day of Check In (DD/MM/YYYY): ");
+                DateTime checkin = Convert.ToDateTime(Console.ReadLine());
+                Console.WriteLine("\nPlease Enter Your Day of Check Out (DD/MM/YYYY): ");
+                DateTime checkout = Convert.ToDateTime(Console.ReadLine());
+                Console.WriteLine("");
+                while (true)
+                {
+                    if (guestinput < GuestList.Count + 1)
                     {
-                        while (true)
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                if (guestinput < GuestList.Count && guestinput > 0)
+                {
+                    Guest changestay = GuestList[guestinput - 1];
+                    Stay stay1 = new(checkin, checkout);
+                    changestay.HotelStay = stay1;
+                    List<Room> temp = new List<Room>();
+                    foreach (Room r in RoomList)
+                    {
+                        if (r.isAvail)
                         {
-                            Console.WriteLine("Do You Require Wifi? (Y/N): ");
-                            string? wifichoice = Console.ReadLine();
-                            if (wifichoice.ToUpper() == "Y")
-                            {
-                                sr.requireWifi = true;
-                                break;
-                            }
-                            else if (wifichoice.ToUpper() == "N")
-                            {
-                                sr.requireWifi = false;
-                                break;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Enter Valid Option!");
-                            }
-                        }
-                        
-                        while (true)
-                        {
-                            Console.WriteLine("Do You Require Breakfast? (Y/N): ");
-                            string? bfastchoice = Console.ReadLine();
-                            if (bfastchoice.ToUpper() == "Y")
-                            {
-                                sr.requireBreakfast = true;
-                                break;
-                            }
-                            else if (bfastchoice.ToUpper() == "N")
-                            {
-                                sr.requireBreakfast = false;
-                                break;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Enter Valid Option!");
-                            }
+                            temp.Add(r);
                         }
                     }
-                    r.isAvail = false;
-                    changestay.HotelStay.AddRoom(r);
+                    int x = 1;
+                    foreach (Room r in temp)
+                    {
+                        Console.WriteLine("[{0}] - {1}", x, r);
+                        x++;
+                    }
+                    int choice = 0;
+
+                    while (true)
+                    {
+                        Console.WriteLine("\nPlease Select A Room Number: ");
+                        int inputchoice = Convert.ToInt32(Console.ReadLine());
+                        if (inputchoice < temp.Count + 1)
+                        {
+                            choice = inputchoice;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nInvalid Input! ");
+                            continue;
+                        }
+                    }
+
+                    Room room = temp[choice - 1];
+                    foreach (Room r in RoomList)
+                    {
+                        if (r == room)
+                        {
+                            if (room is StandardRoom sr)
+                            {
+                                while (true)
+                                {
+                                    Console.WriteLine("\nDo You Require Wifi? (Y/N): ");
+                                    string? wifichoice = Console.ReadLine();
+                                    if (wifichoice.ToUpper() == "Y")
+                                    {
+                                        sr.requireWifi = true;
+                                        break;
+                                    }
+                                    else if (wifichoice.ToUpper() == "N")
+                                    {
+                                        sr.requireWifi = false;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("\nEnter Valid Option!");
+                                    }
+                                }
+
+                                while (true)
+                                {
+                                    Console.WriteLine("\nDo You Require Breakfast? (Y/N): ");
+                                    string? bfastchoice = Console.ReadLine();
+                                    if (bfastchoice.ToUpper() == "Y")
+                                    {
+                                        sr.requireBreakfast = true;
+                                        break;
+                                    }
+                                    else if (bfastchoice.ToUpper() == "N")
+                                    {
+                                        sr.requireBreakfast = false;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("\nEnter Valid Option!");
+                                    }
+                                }
+                            }
+                            r.isAvail = false;
+                            changestay.HotelStay.AddRoom(r);
+                        }
+                    }
+                    int var = 0;
+                    while (true)
+                    {
+                        Console.WriteLine("\nWould You Like To Select Another Room? (Y/N): ");
+                        string? anotherchoice = Console.ReadLine();
+                        if (anotherchoice.ToUpper() == "N")
+                        {
+                            changestay.IsCheckedin = true;
+                            Console.WriteLine("\nCheck In Succesful!");
+                            var += 1;
+                            break;
+                        }
+                        else if (anotherchoice.ToUpper() == "Y")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nEnter Valid Option!");
+                        }
+                    }
+                    if (var == 1)
+                    {
+                        break;
+                    }
                 }
             }
-            int var = 0;
+            catch (Exception ex)
+            {
+                Console.WriteLine("\nInvalid Input! \n");
+                checkinguest();
+            }
+        }
+    }
+
+    // Name: Natalie Chan
+    // Student Number: S10220879H
+
+    void gueststaydetails()
+    {
+
+    }
+
+    // Name: Isaac Khoo
+    // Student Number: S10244252C
+
+    void extendstay()
+    {
+        try
+        {
+            displayguestv2();
+            Console.WriteLine("\nPlease Select A Guest To Retrieve: ");
+            int guestinput = Convert.ToInt32(Console.ReadLine());
             while (true)
             {
-                Console.WriteLine("Would You Like To Select Another Room? (Y/N): ");
-                string? anotherchoice = Console.ReadLine();
-                if (anotherchoice.ToUpper() == "N")
-                {
-                    changestay.IsCheckedin = true;
-                    Console.WriteLine("Check In Succesful!");
-                    var += 1;
-                    break;
-                }
-                else if (anotherchoice.ToUpper() == "Y")
+                if (guestinput < GuestList.Count + 1)
                 {
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Enter Valid Option!");
+                    continue;
                 }
             }
-            if (var == 1)
+            for (int i = 0; i < GuestList.Count; i++)
             {
-                break;
+                if (guestinput == i + 1 && GuestList[i].IsCheckedin == true)
+                {
+                    Console.WriteLine("\n" + GuestList[i].ToString());
+                    Console.WriteLine("\nHow Many Days Do You Want To Extend? : ");
+                    int extend = Convert.ToInt32(Console.ReadLine());
+                    GuestList[i].HotelStay.CheckoutDate = GuestList[i].HotelStay.CheckoutDate.AddDays(extend);
+                    displayguestv2();
+                }
             }
-        }   
-    }
-}
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("\nInvalid Input! \n");
+            extendstay();
+        }
 
-// Name: Natalie Chan
-// Student Number: S10220879H
+     }
 
-void gueststaydetails()
-{
-
-}
-
-// Name: Isaac Khoo
-// Student Number: S10244252C
-
-void extendstay()
-{
-    
-}
-
-
-
-
-
-
-
-
-
-
-startupmenu();
