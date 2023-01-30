@@ -32,7 +32,7 @@ namespace PRG_ASG
 
         public override string ToString()
         {
-            return "Name: " + Name + "Passport Number: " + PassportNum + "Hotel Stay: " + HotelStay + "Member: " + Member + "Is Checked-in: " + IsCheckedin;
+            return "Name: " + Name + "\tPassport Number: " + PassportNum + HotelStay.ToString() + Member.ToString() + "\tIs Checked-in: " + IsCheckedin;
         }
     }
 }

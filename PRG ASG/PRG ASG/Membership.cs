@@ -61,7 +61,7 @@ namespace PRG_ASG
 
         public override string ToString()
         {
-            return "Status: " + Status + "\tPoints: " + Points;
+            return "\tStatus: " + Status + "\tPoints: " + Points;
 
         }
     }

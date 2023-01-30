@@ -43,7 +43,7 @@ namespace PRG_ASG
 
         public override string ToString()
         {
-            return "Check-in Date: " + CheckinDate + "\tCheck-out Date: " + CheckoutDate;
+            return "\tCheck-in Date: " + DateOnly.FromDateTime(CheckinDate) + "\tCheck-out Date: " + DateOnly.FromDateTime(CheckoutDate);
         }
     }
 }

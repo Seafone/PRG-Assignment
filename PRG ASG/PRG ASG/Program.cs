@@ -2,6 +2,7 @@ using PRG_ASG;
 using System.ComponentModel.Design;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 // Name: Isaac Khoo
 // Student Number: S10244252
 
@@ -202,6 +203,16 @@ void DisplayGuest()
     }
 
 }
+
+void displayguestv2()
+{
+    for (int i =0; i < GuestList.Count; i++)
+    {
+        int x = i + 1;
+        Console.WriteLine("[" + x + "]" + GuestList[i].ToString());
+    }
+}
+
 // Name: Isaac Khoo
 // Student Number: S10244252C
 
@@ -234,7 +245,116 @@ void registerguest()
 
 void checkinguest()
 {
+    while (true)
+    {
+        displayguestv2();
+        Console.WriteLine("\nPlease Select A Guest To Retrieve: ");
+        int guestinput = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("\nPlease Enter Your Day of Check In (DD/MM/YYYY): ");
+        DateTime checkin = Convert.ToDateTime(Console.ReadLine());
+        Console.WriteLine("\nPlease Enter Your Day of Check Out (DD/MM/YYYY): ");
+        DateTime checkout = Convert.ToDateTime(Console.ReadLine());
 
+        if (guestinput < GuestList.Count && guestinput > 0)
+        {
+            Guest changestay = GuestList[guestinput-1];
+            Stay stay1 = new(checkin, checkout);
+            changestay.HotelStay = stay1;
+            List<Room> temp = new List<Room>();
+            foreach(Room r in RoomList)
+            {
+                if (r.isAvail)
+                {
+                    temp.Add(r);
+                }
+            }
+            int x = 1;
+            foreach(Room r in temp)
+            {
+                Console.WriteLine("[{0}] - {1}",x ,r);
+                x++;
+            }
+
+            Console.WriteLine("Please Select A Room Number: ");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            Room room = temp[choice - 1];
+            foreach(Room r in RoomList)
+            {
+                if (r == room)
+                {   
+                    if (room is StandardRoom sr)
+                    {
+                        while (true)
+                        {
+                            Console.WriteLine("Do You Require Wifi? (Y/N): ");
+                            string? wifichoice = Console.ReadLine();
+                            if (wifichoice.ToUpper() == "Y")
+                            {
+                                sr.requireWifi = true;
+                                break;
+                            }
+                            else if (wifichoice.ToUpper() == "N")
+                            {
+                                sr.requireWifi = false;
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Enter Valid Option!");
+                            }
+                        }
+                        
+                        while (true)
+                        {
+                            Console.WriteLine("Do You Require Breakfast? (Y/N): ");
+                            string? bfastchoice = Console.ReadLine();
+                            if (bfastchoice.ToUpper() == "Y")
+                            {
+                                sr.requireBreakfast = true;
+                                break;
+                            }
+                            else if (bfastchoice.ToUpper() == "N")
+                            {
+                                sr.requireBreakfast = false;
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Enter Valid Option!");
+                            }
+                        }
+                    }
+                    r.isAvail = false;
+                    changestay.HotelStay.AddRoom(r);
+                }
+            }
+            int var = 0;
+            while (true)
+            {
+                Console.WriteLine("Would You Like To Select Another Room? (Y/N): ");
+                string? anotherchoice = Console.ReadLine();
+                if (anotherchoice.ToUpper() == "N")
+                {
+                    changestay.IsCheckedin = true;
+                    Console.WriteLine("Check In Succesful!");
+                    var += 1;
+                    break;
+                }
+                else if (anotherchoice.ToUpper() == "Y")
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Enter Valid Option!");
+                }
+            }
+            if (var == 1)
+            {
+                break;
+            }
+        }   
+    }
 }
 
 // Name: Natalie Chan
