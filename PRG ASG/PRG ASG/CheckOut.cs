@@ -1,3 +1,13 @@
+using System;
+using System.IO;
+using CsvHelper;
+using System.Globalization;
+using System.Text.RegularExpressions;
+using MembershipNamespace;
+using CSVmanager;
+using RoomNamespace;
+using StayNamespace;
+
 namespace CheckOut
 {
     public class CheckOutClass
