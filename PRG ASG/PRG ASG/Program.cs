@@ -142,81 +142,66 @@ void initialiseGuest()
 
 }
 
-// Name: Isaac Khoo
-// Student Number: S10244252C
+// Name: Natalie Chan
+// Student Number: S10220879H
 
-void startupmenu()
+static void menu()
 {
     try
     {
-        Console.WriteLine("=======================================================================================================");
-        Console.WriteLine("Select Function");
-        Console.WriteLine("1: All Guests \n2: Available Rooms \n3: Register Guest \n4: Check-in guest \n5: Stay Details Of Guest \n6: Extend Stay \n0: Quit Menu");
-        Console.WriteLine("=======================================================================================================");
-        Console.WriteLine("\nInput Option: ");
-        string selectfunction = Console.ReadLine();
-        Console.WriteLine("");
-        int selectedfunction = Convert.ToInt32(selectfunction);
-
-        if (selectedfunction == 1)
+        while (true)
         {
-            DisplayGuest();
-            Console.WriteLine("");
-            startupmenu();
-        }
+            Console.WriteLine("Welcome to the Hotel Management System");
+            Console.WriteLine("Please select an option from the menu below:");
+            Console.WriteLine("1. List all guests");
+            Console.WriteLine("2. List all rooms");
+            Console.WriteLine("3. Register a guest");
+            Console.WriteLine("4. Check in a guest");
+            Console.WriteLine("5. Display stay details of a guest");
+            Console.WriteLine("6. Extends stay");
+            Console.WriteLine("7. Exit");
 
-        else if (selectedfunction == 2)
-        {
-            DisplayAvailroom();
-            Console.WriteLine("");
-            startupmenu();
-        }
-
-        else if (selectedfunction == 3)
-        {
-            registerguest();
-            Console.WriteLine("");
-            startupmenu();
-        }
-
-        else if (selectedfunction == 4)
-        {
-            checkinguest();
-            Console.WriteLine("");
-            startupmenu();
-        }
-
-        else if (selectedfunction == 5)
-        {
-            gueststaydetails();
-            Console.WriteLine("");
-            startupmenu();
-        }
-
-        else if (selectedfunction == 6)
-        {
-            extendstay();
-            Console.WriteLine("");
-            startupmenu();
-        }
-
-        else if (selectedfunction == 0)
-        {
-            Console.WriteLine("Ending program... ...");
-        }
-
-        else
-        {
-            Console.WriteLine("Invalid Input! ");
-            startupmenu();
+            int option = Convert.ToInt32(Console.ReadLine());
+            if (option == 1)
+            {
+                DisplayGuest();
+            }
+            else if (option == 2)
+            {
+                DisplayRooms();
+            }
+            else if (option == 3)
+            {
+                registerguest();
+            }
+            else if (option == 4)
+            {
+                checkinguest();
+            }
+            else if (option == 5)
+            {
+                gueststaydetails();
+            }
+            else if (option == 6)
+            {
+                extendstay();
+            }
+            else if (option == 7)
+            {
+                Console.WriteLine("Thank you for using the Hotel Management System");
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Please enter a valid option");
+            }
         }
     }
-    catch (Exception ex)
+    catch (Exception e)
     {
-        Console.WriteLine("Invalid Input! ");
-        startupmenu();
+        Console.WriteLine(e.Message);
+        menu();
     }
-}
 
 
     // Name: Natalie Chan
@@ -270,8 +255,103 @@ void startupmenu()
     // Student Number: S10220879H
     void registerguest()
     {
+            try
+            {
+                //take input foe name and passprt number
 
-    }
+                Console.WriteLine("Enter Name: ");
+                string name = Console.ReadLine();
+                //check if number contains only alphabets
+                if (Regex.IsMatch(name, @"^[a-zA-Z]+$"))
+                {
+                    Console.WriteLine("Name is valid");
+                }
+                else
+                {
+                    Console.WriteLine("Name is not valid");
+                    RegisterGuest();
+                }
+                Console.WriteLine("Enter Passport Number: ");
+                string passport = Console.ReadLine();
+
+                //create a membership object
+                Membership membership = new Membership();
+
+                //append data into guests.csv usinf file.writeline
+
+                using (var guestswriter = new StreamWriter("Guests.csv", true))
+                using (var csvwriter = new CsvWriter(guestswriter, CultureInfo.InvariantCulture))
+                {
+                    csvwriter.WriteRecord(new CSVmanager.GuestsFile
+                    {
+                        Name = name,
+                        PassportNumber = passport,
+                        MembershipStatus = membership.Status,
+                        MembershipPoints = membership.Points
+                    });
+                }
+
+
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                RegisterGuest();
+            }
+        }
+    
+        static DateOnly datecreator(string time)
+        {
+            try
+            {
+                Console.WriteLine("Enter the {0} year", time);
+                int year = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter the {0} month", time);
+                int month = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter the {0} day", time);
+                int day = int.Parse(Console.ReadLine());
+                DateOnly date = new DateOnly(year, month, day);
+                //checking validation
+                if (date < new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day))
+                {
+                    Console.WriteLine("Date cannot be from past");
+                    Console.WriteLine("Please try again");
+                    return datecreator(time);
+                }
+                return date;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("Please try again");
+                return datecreator(time);
+            }
+        }
+
+
+        static string optioncreator(string opt)
+        {
+            Console.WriteLine("do you want {0} answer in Y/N?", opt);
+            string option = Console.ReadLine();
+
+            if (option == "Y" || option == "y")
+            {
+                return "TRUE";
+            }
+            else if (option == "N" || option == "n")
+            {
+                return "FALSE";
+            }
+            else
+            {
+                Console.WriteLine("Invalid option please try again");
+                return optioncreator(opt);
+            }
+
+        }
 
     // Name: Isaac Khoo
     // Student Number: S10244252C
@@ -429,8 +509,116 @@ void startupmenu()
 
     void gueststaydetails()
     {
+            try{
+            //take guest details
+            GuestsFile selectedguest = getGuest();
 
-    }
+            //take checkindate
+            DateOnly checkindate = datecreator("check in");
+            //take checkoutdate
+            DateOnly checkoutdate = datecreator("check out");
+            //check if checkoutdate is greater than checkindate
+            if (checkoutdate < checkindate)
+            {
+                Console.WriteLine("Checkout date cannot be before checkin date");
+                Console.WriteLine("Please try again");
+                checkoutdate = datecreator("check out");
+            }
+            System.Collections.Generic.List<CSVmanager.RoomsFile> room =
+           new System.Collections.Generic.List<CSVmanager.RoomsFile>();
+            //open rooms.csv and display data
+            using (var roomreader = new StreamReader("Rooms.csv"))
+            using (var csvreader = new CsvReader(roomreader, CultureInfo.InvariantCulture))
+            {
+                var rooms = csvreader.GetRecords<CSVmanager.RoomsFile>().ToList();
+                room = rooms;
+            }
+            //list all available rooms
+            List<RoomsFile> availableRooms = listAllAvailableRooms(room);
+            int i = 1;
+            foreach (var rec in availableRooms)
+            {
+                Console.WriteLine(" {0} , RoomType: {1}, RoomNumber: {2}, BedConfiguration: {3}, DailyRate: {4}", i, rec.RoomType, rec.RoomNumber, rec.BedConfiguration, rec.DailyRate);
+                i++;
+            }
+            //take user option
+            Console.WriteLine("Enter the number of the room you want to check in: ");
+            int option2 = Convert.ToInt32(Console.ReadLine());
+            //check if option is valid
+            if (option2 > 0 && option2 <= i)
+            {
+
+            }
+            else
+            {
+                Console.WriteLine("Invalid option");
+                CheckInGuest();
+            }
+            RoomsFile selectedroom = availableRooms[option2 - 1];
+
+            if (selectedroom.RoomType == "Standard")
+            {
+                // require wifi [Y/N] & require breakfast [Y/N]
+                string wifi = optioncreator("wifi");
+                string breakfast = optioncreator("breakfast");
+                storeCheckin(
+                    selectedguest.Name,
+                    selectedguest.PassportNumber,
+                    "TRUE",
+                    checkindate,
+                    checkoutdate,
+                    selectedroom.RoomNumber,
+                    wifi,
+                    breakfast,
+                    "FALSE");
+            }
+            if (selectedroom.RoomType == "Deluxe")
+            {
+                string ExtraBed = optioncreator("extra bed");
+                storeCheckin(
+                    selectedguest.Name,
+                    selectedguest.PassportNumber,
+                    "TRUE",
+                    checkindate,
+                    checkoutdate,
+                    selectedroom.RoomNumber,
+                    "TRUE",
+                    "TRUE",
+                    ExtraBed);
+            }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("Please try again");
+                CheckInGuest();
+            }
+        }
+
+        //display guests dtails
+
+        public static void displayguests(){
+            GuestsFile guestsData=getGuest();
+
+            //store all guests csv data in an array
+            System.Collections.Generic.List<GuestsFile> guest =
+                new System.Collections.Generic.List<GuestsFile>();
+            //open Stays.csv and read all records
+            using (var staysreader = new StreamReader("Stays.csv"))
+            using (var csvreader = new CsvReader(staysreader, CultureInfo.InvariantCulture))
+            {
+                var stays = csvreader.GetRecords<CSVmanager.StaysFile>().ToList();
+                foreach (var rec in stays)
+                {
+                    if (rec.PassportNumber == guestsData.PassportNumber)
+                    {
+                        Console.WriteLine("Name: {0}, PassportNumber: {1}, MembershipStatus: {2}, MembershipPoints: {3}, Checkin Status: {4}", guestsData.Name, guestsData.PassportNumber, guestsData.MembershipStatus, guestsData.MembershipPoints,rec.IsCheckedIn);
+                        Console.WriteLine("CheckinDate: {0}, CheckoutDate: {1}, RoomNumber: {2}, Wifi: {3}, Breakfast: {4}, ExtraBed: {5}", rec.CheckinDate, rec.CheckoutDate, rec.RoomNumber, rec.Wifi, rec.Breakfast, rec.ExtraBed);
+                    }
+                }
+            }   
+
+        }
 
     // Name: Isaac Khoo
     // Student Number: S10244252C
