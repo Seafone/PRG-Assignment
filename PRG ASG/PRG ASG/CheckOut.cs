@@ -8,6 +8,9 @@ using CSVmanager;
 using RoomNamespace;
 using StayNamespace;
 
+// Name: Natalie Chan
+//Student Number: S10220879H
+
 namespace CheckOut
 {
     public class CheckOutClass
